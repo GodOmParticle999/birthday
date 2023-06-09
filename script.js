@@ -4,7 +4,7 @@ const container=document.querySelector(".container");
 const imageContainer=document.querySelector(".imageContainer");
 const detailsContainer=document.querySelector(".detailsContainer");
 // const names=['navin','ayushmaan','ayush','samarth','aarohi','lakshya','amya','chhandu','anumati','roshan','reena','aradhya','archana','kiran','seema','rani','priya','om','chakradhari','sukant','sundar','ram','lakshman'];
-const objectNames=[{name:"navin",birthDay:"26 December",birthYear:1999},
+const objectNames=[{name:"navin",birthDay:"26 December",birthYear:2000},
 {name:"anumati",birthDay:"01 January",birthYear:1966},
 {name:"ram",birthDay:"25 April",birthYear:2023},
 {name:"lakshman",birthDay:"25 April",birthYear:2023},
@@ -84,15 +84,17 @@ const birthday=(birthdayName)=>{
 
     const object=objectNames.find((objectName)=>{
       if(objectName.name===birthdayName){
+        
         return objectName;
       }  
     });
     if(object){
+      const load=`<img src="loader.svg">`;
+      imageContainer.innerHTML=load;
       const years=currentYear-object.birthYear;
       const yearPlaceholder=years?"years":"year";
       container.style.minHeight="90vh";
-      imageContainer.innerHTML=`<img src="loader.svg">`;
-      imageContainer.innerHTML=`<img src="./${birthdayName}.jpg" alt="${birthdayName}">`;
+      imageContainer.innerHTML=`<img src="./${birthdayName}.jpg" alt="${birthdayName}" loading="lazy">`;
         detailsContainer.innerHTML=`<h2>${birthdayName} is ${years} ${yearPlaceholder} old and birthday is on ${object.birthDay}!</h2>`;
 
       }
