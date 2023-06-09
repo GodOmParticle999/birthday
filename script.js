@@ -1,5 +1,6 @@
 const birthdayInput=document.querySelector(".birthdayInput");
 const form=document.querySelector(".form");
+const container=document.querySelector(".container");
 const imageContainer=document.querySelector(".imageContainer");
 const detailsContainer=document.querySelector(".detailsContainer");
 // const names=['navin','ayushmaan','ayush','samarth','aarohi','lakshya','amya','chhandu','anumati','roshan','reena','aradhya','archana','kiran','seema','rani','priya','om','chakradhari','sukant','sundar','ram','lakshman'];
@@ -7,7 +8,7 @@ const objectNames=[{name:"navin",birthDay:"26 December",birthYear:1999},
 {name:"anumati",birthDay:"01 January",birthYear:1966},
 {name:"ram",birthDay:"25 April",birthYear:2023},
 {name:"lakshman",birthDay:"25 April",birthYear:2023},
-{name:"aaradhya",birthDay:"01 January",birthYear:"2016"},
+{name:"aaradhya",birthDay:"01 January",birthYear:2016},
 {name:"samarth",birthDay:"30 March",birthYear:2022},
 {name:"roshan",birthDay:"29 October",birthYear:2014},
 {name:"ayush",birthDay:"07 June",birthYear:2015},
@@ -33,7 +34,8 @@ const currentYear=new Date().getFullYear();
 console.log(currentYear);
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
-    const birthdayName=(birthdayInput.value).toLowerCase();
+    let birthdayName=(birthdayInput.value).trim();
+    birthdayName=birthdayName.toLowerCase();
     imageContainer.innerHTML="";
     detailsContainer.innerHTML="";
     birthday(birthdayName);
@@ -41,24 +43,76 @@ form.addEventListener("submit",(e)=>{
 })
 const birthday=(birthdayName)=>{
 //    console.log(objectNames);
-   for(let i=0;i<objectNames.length;i++){
+//    for(let i=0;i<objectNames.length;i++){
     
-       if(objectNames[i].name===birthdayName){
-        const years=currentYear-objectNames[i].birthYear;
-        imageContainer.innerHTML=`<img src="./${birthdayName}.jpg" alt="${birthdayName}">`;
-        detailsContainer.innerHTML=`<h2>${birthdayName} is ${years} years old and birthday is on ${objectNames[i].birthDay}!</h2>`;
-        console.log(objectNames[i].name);
-        break;
-       }
-       else{
-        detailsContainer.innerHTML=`<h2>Please correct the spelling of ${birthdayName}!</h2>`;
-       }
+//        if(objectNames[i].name===birthdayName){
+//         const years=currentYear-objectNames[i].birthYear;
+//         container.style.minHeight="90vh";
+//         imageContainer.innerHTML=`<img src="./${birthdayName}.jpg" alt="${birthdayName}">`;
+       
+//         detailsContainer.innerHTML=`<h2>${birthdayName} is ${years} years old and birthday is on ${objectNames[i].birthDay}!</h2>`;
+//         console.log(objectNames[i].name);
+//         break;
+//        }
+    //    else{
+    //     container.style.minHeight="50vh";
+    //     detailsContainer.innerHTML=`<h2>Please correct the spelling of ${birthdayName}!</h2>`;
+    //    }\
+
+    //here find method returns object
+// const found=objectNames.find((ob)=>{
+//     if(ob.name===birthdayName){
+//         return ob;
+//     }
+    
+// })
+// console.log(found)
+// console.log(found.name)
+// console.log(found.birthDay)
+////here find method returns array
+// const filtered=objectNames.filter((ob)=>{
+//     if(ob.name===birthdayName){
+//         return ob;
+//     }
+    
+// })
+// console.log(filtered)
+// console.log(filtered[0].name)
+// console.log(filtered[0].birthDay)
+
+
+
+    const object=objectNames.find((objectName)=>{
+      if(objectName.name===birthdayName){
+        return objectName;
+      }  
+    });
+    if(object){
+      const years=currentYear-object.birthYear;
+      const yearPlaceholder=years?"years":"year";
+      container.style.minHeight="90vh";
+      imageContainer.innerHTML=`<img src="loader.svg">`;
+      imageContainer.innerHTML=`<img src="./${birthdayName}.jpg" alt="${birthdayName}">`;
+        detailsContainer.innerHTML=`<h2>${birthdayName} is ${years} ${yearPlaceholder} old and birthday is on ${object.birthDay}!</h2>`;
+
+      }
+      else{
+        container.style.minHeight="50vh";
+        detailsContainer.innerHTML=`<h2>Oops the name ${birthdayName} doesn't exist here!</h2>`;
+      }
+    
+
+
+
+//  if(names.includes(birthdayName)){
+//       console.log('yes');
+//         imageContainer.innerHTML=`<img src="images/${birthdayName}.jpg" alt="${birthdayName}">`;
+//         detailsContainer.innerHTML=`<h2>${birthdayName}'s birthday is on ...!</h2>`;
+//     }
+//     else{
+//       console.log('no');
+//         detailsContainer.innerHTML=`<h2>Please correct the spelling of ${birthdayName}!</h2>`
+//     }
+    
   }
-    // if(names.includes(birthdayName)){
-    //     imageContainer.innerHTML=`<img src="images/${birthdayName}.jpg" alt="${birthdayName}">`;
-    //     detailsContainer.innerHTML=`<h2>${birthdayName}'s birthday is on ...!</h2>`;
-    // }
-    // else{
-    //     detailsContainer.innerHTML=`<h2>Please correct the spelling of ${birthdayName}!</h2>`
-    // }
-}
+   
