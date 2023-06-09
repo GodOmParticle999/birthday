@@ -1,5 +1,6 @@
 const birthdayInput=document.querySelector(".birthdayInput");
 const form=document.querySelector(".form");
+const img=document.querySelector(".img");
 const container=document.querySelector(".container");
 const imageContainer=document.querySelector(".imageContainer");
 const detailsContainer=document.querySelector(".detailsContainer");
@@ -94,9 +95,15 @@ const birthday=(birthdayName)=>{
       const years=currentYear-object.birthYear;
       const yearPlaceholder=years?"years":"year";
       container.style.minHeight="90vh";
-      imageContainer.innerHTML=`<img src="./${birthdayName}.jpg" alt="${birthdayName}" loading="lazy">`;
-        detailsContainer.innerHTML=`<h2>${birthdayName} is ${years} ${yearPlaceholder} old and birthday is on ${object.birthDay}!</h2>`;
+      const realImg=`<img class="img" src="./${birthdayName}.jpg" alt="${birthdayName}" loading="lazy">`;
+      setTimeout(()=>{
 
+        imageContainer.innerHTML=realImg;
+        setTimeout(()=>{
+          detailsContainer.innerHTML=`<h2>${birthdayName} is ${years} ${yearPlaceholder} old and birthday is on ${object.birthDay}!</h2>`;
+        },1100)
+      },700)
+      
       }
       else{
         container.style.minHeight="50vh";
